@@ -6,6 +6,10 @@ TagManager:
   tags:
   - Movemeteor
   - Meteorito
+  - Comportamiento
+  - Bullet
+  - Meteoritos
+  - Enemy
   layers:
   - Default
   - TransparentFX

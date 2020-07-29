@@ -6,6 +6,9 @@ public class Bullet : MonoBehaviour
 {
     public float speed = 20f;
     public float damageAmount = 10f;
+    public GameObject hitparticlePrefab;
+
+
 
     private Rigidbody2D rb;
 
@@ -15,18 +18,41 @@ public class Bullet : MonoBehaviour
         rb.velocity = Vector2.up * speed;
     }
 
-    private void OnCollisionEnter2D(Collision2D collision)
+    private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.gameObject.CompareTag("Meteorito"))
+        if (collision.gameObject.CompareTag("Meteoritos"))
         {
-            Movemeteor meteorito = collision.gameObject.GetComponent<Movemeteor>();
-            if (meteorito != null)
+            Meteoritos meteoritos = collision.gameObject.GetComponent<Meteoritos>();
+
+            if (meteoritos != null)
             {
+                FindObjectOfType<Score>().AddPoints(10);
+
                 Destroy(collision.gameObject);
+                Destroy(this.gameObject);
+                GameObject particles = Instantiate(hitparticlePrefab, transform.position, transform.rotation);
+                Destroy(particles, 5f);
+                Destroy(this.gameObject);
+            }
+        }
+        else if (collision.gameObject.CompareTag("Enemy"))
+        {
+            Enemy enemy = collision.gameObject.GetComponent<Enemy>();
+
+            if (enemy != null)
+            {
+                FindObjectOfType<Score>().AddPoints(10);
+
+                enemy.Damage(damageAmount);
+
+                GameObject particles2 = Instantiate(hitparticlePrefab, transform.position, transform.rotation);
+                Destroy(particles2, 1f);
                 Destroy(this.gameObject);
             }
         }
 
 
     }
+
+
 }

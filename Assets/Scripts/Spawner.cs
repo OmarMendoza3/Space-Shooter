@@ -2,23 +2,36 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-
 public class Spawner : MonoBehaviour
 {
-
-    public GameObject prefab;
-    public GameObject prefab2;
+    public GameObject[] prefabs;
     public float timeBetweenSpawns = 1f;
+
+    float bottomLimit;
+    float leftLimit;
+    float topLimit;
+    float rightLimit;
+
 
     private void Start()
     {
+        Vector3 bottomLeft = Camera.main.ViewportToWorldPoint(Vector3.zero);
+        bottomLimit = bottomLeft.y;
+        leftLimit = bottomLeft.x;
+
+        Vector3 topRight = Camera.main.ViewportToWorldPoint(Vector3.one);
+        topLimit = topRight.y;
+        rightLimit = topRight.x;
+
         InvokeRepeating("Spawn", 1f, timeBetweenSpawns);
     }
     void Spawn()
     {
-        Vector3 position = new Vector3(0f, 0f, 0f);
-        position.y = Random.Range(3f, 4f);
-        position.x = Random.Range(-4f, 4f);
-        Instantiate(prefab, position, Quaternion.identity);
+        float x = Random.Range(leftLimit, rightLimit);
+        Vector3 position = new Vector3(x, topLimit + 3F, 0f);
+
+        int random = Random.Range(0, prefabs.Length);
+
+        Instantiate(prefabs[random], position, Quaternion.identity);
     }
 }

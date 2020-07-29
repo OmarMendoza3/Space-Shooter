@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 1187728376}
   m_Layer: 0
   m_Name: meteorGrey_big2.png
-  m_TagString: Meteorito
+  m_TagString: Meteoritos
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -141,8 +141,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 7207089939057540132}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f4440fad0c1882947afbd3a70318b046, type: 3}
+  m_Script: {fileID: 11500000, guid: 87e6c5dcf82c62041942228852b8090e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 6
+  speed: 5
   damageAmount: 10
+  particlePrefab: {fileID: 9158492406938179664, guid: 7d665457b9ff47241a4f02fabb1fb1dd,
+    type: 3}
